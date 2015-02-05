@@ -1,0 +1,9 @@
+<apex:page controller="publicMapController" showHeader="false"  standardStylesheets="false">
+<head>
+.... some code here ...
+</head>
+ <body>
+     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+     <div id="map_canvas"></div>      
+    </body>
+</apex:page>

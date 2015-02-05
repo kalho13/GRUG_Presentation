@@ -1,0 +1,19 @@
+          
+
+          Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.publicMapController.getOpenCourses}',
+            function(records, e){ //using the callback function loop through all of the course records returned to create a list of objects.
+              $j.each(records,function(index, course){             
+              var c = {
+                  key :      course.Account__r.Location__Latitude__s + ':' + course.Account__r.Location__Longitude__s,
+                  lat :      course.Account__r.Location__Latitude__s,
+                  lon :      course.Account__r.Location__Longitude__s,
+                  customer : course.Account__r.Name,
+                  model :    course.Model__c,
+                  city :     course.Account__r.ShippingCity,
+                  state :    course.Account__r.ShippingState,
+                  country :  course.Account__r.ShippingCountry,
+                  website :  course.Account__r.Website
+                };
+
+            courseList.push(c);
+          });  //ends the $j.each loop through the values returned from salesforce creating a list of objects for adding the the map as markers

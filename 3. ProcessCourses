@@ -1,0 +1,27 @@
+function processCourses(courseList){
+          var processedCourses=[];
+          $j.each(courseList, function(key, value) {  
+            
+            //if this course location (defined by a key of lat & long) is not part of the processedCourses list go ahead and add to the list      
+            if( $j.inArray(value['key'], processedCourses) == -1 ) {
+            //return all of the course records with the same key.  The result will contain 1 to many recordss
+              var result = $j.grep(courseList, function(v,i) {                    
+                  return v['key'] === value.key;
+              });
+                                              
+              // Create the marker                
+              var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(result[0]['lat'], result[0]['lon']),
+                map: map,
+                title:"",
+                url:""
+              }); 
+
+              //set the mouse listener event for each marker                                
+              setMouseOver(result, marker);
+              setMouseOut(marker);
+              setMouseClick(marker);
+              processedCourses.push(value.key); 
+            } //end $j.inArray
+          });//end $j.each  courseList 
+        }//close processCourses
